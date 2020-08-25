@@ -1,32 +1,75 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class="container-100">
+      <header class="header">
+        <navi></navi>
+      </header>
+      <transition name="fade">
+        <router-view />
+      </transition>
+      <section>
+        <activity></activity>
+      </section>
+      <footer>
+        <foot></foot>
+      </footer>
     </div>
-    <router-view/>
   </div>
 </template>
 
-<style lang="scss">
+
+<script>
+import Activity from "./components/Activity.vue";
+import Foot from "./components/Foot.vue";
+import Navi from "./components/Navi.vue";
+
+export default {
+  name: "App",
+  components: {
+    Foot,
+    Activity,
+    Navi
+  },
+  data() {
+    return {
+      arregloRouter: [
+        // { nombre: "HOME", ruta: "/" },
+        // { nombre: "NOSOTROS", ruta: "/nosotros" },
+        // { nombre: "TIENDA", ruta: "/tienda" },
+        // { nombre: "CONTACTO", ruta: "/contacto" }
+      ]
+    };
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+@import "../public/css/styles.scss";
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+.container-100 {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+header {
+  display: flex;
+  flex-flow: column nowrap;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+  transition-timing-function: ease-in-out;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
